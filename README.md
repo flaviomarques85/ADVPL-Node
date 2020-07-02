@@ -12,3 +12,9 @@ deixar com que ela faça a percistencia da informação e retorno com um respons
 	conout("Dados: " + data)
 	conout("ID...: " + htmlReturn, '')
 '
+<br>
+```
+git status
+git add
+git commit
+```
