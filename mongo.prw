@@ -21,20 +21,21 @@ user function nodeHttp()
 	conout("Dados: " + data)
 	conout("ID...: " + htmlReturn, '')  
 return 
-      
+
+// Agora a mesma funcao escrita acima porem usando TwebEngine     
 // Exibe a pagina HTML que vai enviar os dados ao NodeJS
 // e receber o ID do registro via WebSocket
 // U_nodeWebengine()
 user function nodeWebengine()
   oDlg = MsDialog():New( 000, 000, 150, 650, "AdvPL x NodJS x MongoDB",,,.F.,, 0, 16777215,,,.T.,, ,.F. )
  
-	// WebSocket responsavel pela comunicacao entre o AdvPL e o HTML
+	// cria o WebSocket responsavel pela comunicacao entre o AdvPL e o HTML
 	oWebChannel := TWebChannel():New()
 	oWebChannel:connect()
 	conout("WebChannel disponivel na porta: " + cValToChar(oWebChannel:nPort))
 	oWebChannel:bJsToAdvpl := {|self,codeType,codeContent| conout("", "TWebEngine", codeType, codeContent) } 
 
-	// Browser (Chromium)
+	// Consome o documento HTML informado no endereço.
 	oWeb := oWebEngine := TWebEngine():New(oDlg,0,0,0,0)
 	oWeb:navigate("file:///C:/ADVPL/ADVPL-Node/index.html?port=" + cValToChar(oWebChannel:nPort))
 	oWeb:Align := 5                                    
