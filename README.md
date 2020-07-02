@@ -2,7 +2,7 @@
 Projeto de integração do ADVPL com o Nodejs
 <br>
 usando o metodo HttpGet() ou HttpPost() do apvpl é possivel enviar informações para uma aplicação Node,<br>
-deixar com que ela faça a percistencia da informação e retorno com um response padrao. <br><br>
+deixar com que ela faça a percistencia da informação e retorne com um response padrao. <br><br>
 
 ```
 // Inclusão via HttpGet   
