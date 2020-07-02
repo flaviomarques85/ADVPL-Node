@@ -1,0 +1,65 @@
+<script src="totvstec.js"></script>
+<script>
+    window.onload = function() {	
+        // Habilita o WebSocket
+        var baseUrl = "ws://localhost:" + totvstec.getParam("port");
+        var socket = new WebSocket(baseUrl);
+        socket.onclose = function(){ console.error("web channel closed"); };
+        socket.onerror = function(error){ console.error("web channel error: " + error); };
+        socket.onopen = function()
+        {
+            new QWebChannel(socket, function(channel) {
+                window.dialog = channel.objects.mainDialog;
+            });
+        }
+    }            
+
+    function mySubmit() {
+        // Prepara o envio dos dados preenchidos no FORM
+        var xhr = new XMLHttpRequest();
+
+        // Aqui adiciono um listener para capturar
+        // o ID do registro persistido no Mongo via Node
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == XMLHttpRequest.DONE){
+                alert("recordInserted: " + xhr.responseText);
+
+                // Envio o ID a camada AdvPL utilizando o WebSocket
+                dialog.jsToAdvpl("recordInserted", xhr.responseText);
+            }
+        }
+
+        // Monto string com os dados preenchidos
+        var elements = document.forms['myForm'].elements;
+        var loop = 0;
+        var sendFields = ""
+        for (i=0; i<elements.length; i++){
+            if (elements[i].type == 'text'){
+                if (loop > 0)
+                    sendFields += "&"
+                loop++;
+
+                sendFields += elements[i].name + "=" + elements[i].value;
+            }
+        }
+
+        // Envia dados ao Node
+        xhr.open('POST', "http://localhost:3000?" + sendFields, true);
+        xhr.send();
+    }
+</script>
+
+<form id="myForm" >
+    <input type="text" name="Field1" placeholder="Field1">
+    <input type="text" name="Field2" placeholder="Field2">
+    <input type="text" name="Field3" placeholder="Field3">
+    <input type="button" value="Postar" onclick="mySubmit()">
+</form>
+
+
+
+
+
+
+
+
