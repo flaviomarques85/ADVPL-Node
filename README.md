@@ -6,11 +6,11 @@ deixar com que ela faça a percistencia da informação e retorno com um respons
 
 ```
 // Inclusão via HttpGet   
-	data := "sua string de dados"
-	htmlReturn := HttpGet(server, data)
-	conout("Via HttpGet - No AppServer")
-	conout("Dados: " + data)
-	conout("ID...: " + htmlReturn, '')
+data := "sua string de dados"
+htmlReturn := HttpGet(server, data)
+conout("Via HttpGet - No AppServer")
+conout("Dados: " + data)
+conout("ID...: " + htmlReturn, '')
 ```
 <br>
 
